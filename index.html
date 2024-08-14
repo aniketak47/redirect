@@ -1,51 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loading...</title>
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #FFFFFF;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
 
-        .body-container {
-            text-align: center;
-        }
+      .body-container {
+        text-align: center;
+      }
 
-        .gif-image {
-            width: 96px;
-            height: 96px;
-            margin-bottom: 34px;
-        }
+      .gif-image {
+        width: 96px;
+        height: 96px;
+        margin-bottom: 34px;
+      }
 
-        .text-wait {
-            color: #000000; /* Assuming themes.colors.SecondaryMain is #5A67F2 */
-            font-size: 20px;
-            font-weight: 500;
-            line-height: 45px;
-        }
+      .text-wait {
+        color: #000000;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 45px;
+      }
 
-        .sub-text-wait {
-            color: #000000;
-            font-size: 13px;
-            font-weight: 400;
-            line-height: 20px;
-        }
+      .sub-text-wait {
+        color: #000000;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 20px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="body-container">
-        <img src="hour_glass.gif" alt="Hour Glass" class="gif-image" />
-        <p class="text-wait">We're confirming your details</p>
-        <p class="sub-text-wait">It should only be a few seconds.</p>
+      <img src="hour_glass.gif" alt="Hour Glass" class="gif-image" />
+      <p class="text-wait">We're confirming your details</p>
+      <p class="sub-text-wait">It should only be a few seconds.</p>
     </div>
-</body>
+
+    <script>
+      const isWebview = () => {
+        return (
+          window.ReactNativeWebView ||
+          /webview|wv|ip((?!.*Safari)|(?=.*like Safari))/i.test(
+            navigator.userAgent
+          )
+        );
+      };
+
+      if (isWebview()) {
+        const req = new URLSearchParams(location.search);
+        window.ReactNativeWebView.postMessage(
+          JSON.stringify(Object.fromEntries(req))
+        );
+      }
+    </script>
+  </body>
 </html>
